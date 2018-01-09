@@ -57,14 +57,17 @@ var initDb = function(callback) {
 };
 
 app.get('/', function (req, res) {
-    //res.send('Hello World\n');
+  
+  res.send('Start\n');
     
   // try to initialize the db on every request if it's not already
   // initialized.
   if (!db) {
+    res.send('not db');
     initDb(function(err){});
   }
   if (db) {
+    res.send('db created');
     var col = db.collection('counts');
     // Create a document with request IP and current time of request
     col.insert({ip: req.ip, date: Date.now()});
@@ -72,10 +75,14 @@ app.get('/', function (req, res) {
       if (err) {
         console.log('Error running count. Message:\n'+err);
       }
-      res.render('index.html', { pageCountMessage : count, dbInfo: dbDetails });
+
+      res.send('render with db');
+      //res.render('index.html', { pageCountMessage : count, dbInfo: dbDetails });
     });
   } else {
-    res.render('index.html', { pageCountMessage : null});
+
+    res.send('render without db');
+    //res.render('index.html', { pageCountMessage : null});
   }
   
 });
