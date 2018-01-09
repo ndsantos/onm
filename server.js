@@ -57,6 +57,8 @@ var initDb = function(callback) {
 };
 
 app.get('/', function (req, res) {
+    res.send('Hello World\n');
+    /*
   // try to initialize the db on every request if it's not already
   // initialized.
   if (!db) {
@@ -75,6 +77,7 @@ app.get('/', function (req, res) {
   } else {
     res.render('index.html', { pageCountMessage : null});
   }
+  */
 });
 
 app.get('/pagecount', function (req, res) {
